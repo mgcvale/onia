@@ -1,0 +1,8 @@
+venv/
+.venv/
+__pycache__/
+pycache/
+*.pycache
+.idea
+teste.csv
+treino.csv
