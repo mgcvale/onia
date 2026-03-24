@@ -6,7 +6,7 @@ A tarefa foi fazer o fine-tuning de um modelo YOLO para a detecção de objetos 
 O dataset já vinha com augmentation (o que causou data leakage entre o set de teste e validação), com uma quantidade moderada de dados (26k imagens 640x640).
 
 ## Ambiente
-Cluster HPC Sdumont2nd; acesso a runtimes com 1xH100 + 512GB RAM + 96 cores; limite de 20 minutos por job.
+Cluster HPC Sdumont2nd; acesso a runtimes com 1xH100; limite de 20 minutos por job.
 
 A prova foi feita do 0 em um período de 5h. Incluído neste tempo está o preparo do ambiente, escolha de modelo, loading dos dados, o trainemento e a estruturação da entrega (relatório + inference.py + inference.srm).
 
