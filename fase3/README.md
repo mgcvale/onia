@@ -1,11 +1,10 @@
-# ONIA
+# ONIA - 3 fase 2025
 
-Repositório destinado a guardar os modelos de IA utilizados na ONIA (Olimpíada Nacional de Inteligência Artificial).
-Os arquivos csv não estão disponibilizados.
+Essa foi minha solução final para o problema de classificação de planetas da terceira fase da ONIA 2025.
 
 Gráficos do melhor modelo obtido:
 <img src="models/0.872.png">
 
-F-Score weighted: 0.872
-
-A arquitetura do modelo se encontra no arquivo [model.py](model.py)
+F-Score weighted (test set): 0.872
+F-Score weighted (eval set): ~0.8
+Classificação final: ~20/270
