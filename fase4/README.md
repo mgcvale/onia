@@ -12,7 +12,7 @@ A prova foi feita do 0 em um período de 5h. Incluído neste tempo está o prepa
 
 ## Metadata
 
-- Argumentos de treinamento utilizados [args.yaml](/fase4/results/args.yaml):
+- Argumentos de treinamento utilizados [args.yaml](/results/args.yaml):
   - Modelo base: Yolo v8
   - Otimizador: SGD + 0.9 momentum
   - LR: decay linear; lr0 = 0.005, lrf = 0.01, warmup = 5, warmup_momentum = 0.8, warmup_bias_lr = 0.1
@@ -28,12 +28,12 @@ A prova foi feita do 0 em um período de 5h. Incluído neste tempo está o prepa
 
 Métricas
 <p align="center">
-<img src="fase4/results/results.png" width="100%">
+<img src="results/results.png" width="100%">
 </p>
 
 Qualidade de classificação
 <p align="center">
-<img src="fase4/results/confusion_matrix.png" width="70%">
+<img src="results/confusion_matrix.png" width="70%">
 </p>
 
 Exemplos
@@ -43,8 +43,8 @@ Exemplos
 <td width="50%"><b align="center">Predições</b></td>
 </tr>
 <tr>
-<td><img src="fase4/results/val_batch2_labels.jpg" width="100%"></td>
-<td><img src="fase4/results/val_batch2_pred.jpg" width="100%"></td>
+<td><img src="results/val_batch2_labels.jpg" width="100%"></td>
+<td><img src="results/val_batch2_pred.jpg" width="100%"></td>
 </tr>
 </table>
 
