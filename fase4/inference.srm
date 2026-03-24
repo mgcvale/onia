@@ -1,0 +1,18 @@
+#!/bin/bash
+#SBATCH --nodes=1            #Numero de Nos
+#SBATCH -p lncc-h100_dev     #Fila (partition) a ser utilizada
+#SBATCH -J simple_cnn           #Nome job
+#SBATCH --gpus-per-node=1    #Numero total de GPUS
+#SBATCH --time=00:20:00
+
+#Exibe os nós alocados para o Job
+echo $SLURM_JOB_NODELIST
+nodeset -e $SLURM_JOB_NODELIST
+
+cd $SLURM_SUBMIT_DIR
+
+module load arch_gpu
+module load pytorch/25.05-py3_nv_container
+# deve ter um model.pt no na pasta model, e o dataset deve ter a pasta de validacao, e um data.yaml correto (igual ta no miguel.vale/PROVA/data)
+export SINGULARITY="singularity run --nv -B ${PWD}:/host_pwd --pwd /host_pwd -B /prj/onia/miguel.vale/model:/model -B /prj/onia/miguel.vale/PROVA/data:/dataset $PT_IMAGE"
+${SINGULARITY} python3 ./inference.py

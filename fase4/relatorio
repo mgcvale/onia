@@ -1,0 +1,21 @@
+RELATORIO - ONIA
+Antes de iniciar o projeto, eu dei uma olhada nos dados, para ter uma noção da tarefa.
+Eu observei:
+1- 26 mil Imagens 640x640 (sem necessidade de up/down scaling).
+2- Objetos relativamente pequenos, algumas cenas com vários deles - importante lembrar disso ao escolher o modelo
+3- As imagens tem augmentation (ruído, cortes, rotacoes etc), mas acho que ainda é bom adicionar um pouco mais durante o treinamento para regularização, especialmente com 26 mil dados (e menos após os splits).
+
+Como não há muito tempo para criar e treinar os modelos, decidi utilizar o model pré-treinado YOLOv8 médio.
+Ele é bem rápido para treinar, fácil de usar com o Ultralytics, e tem uma performance relativamente boa pelo seu tamanho.
+Além disso, como o peso para a Class Accuracy é menor que o peso do mAP, eu não me preocupei tanto com as classificações, e não busquei medidas extras para melhorar essa métrica (por exemplo um ensemble com um classifier separado).
+
+Começei fazendo a divisão dos dados, em um split 70x15x15 (train-test-validate). Isso me permitiu utilizar o early_stopping no set de validacao.
+
+Agora, para os hiperparâmetros:
+1- Optimizer: SGD + momentum: O SGD com momentum costuma ter a melhor performance em visão computacional, por mais que seja mais difícil de ajustar. Meu primeiro modelo usou Adam (para testar alguns hiperparâmetros), e o segundo SGD, para melhorar a performance. Usei 0.9 de momentum, que é típico na maioria das CNNs.
+2- LR: inicial 0.01, cosine de scheduler, com lrf 0.01. Valores que eu obtive com alguns testes com o SGD. Também utilizei warmup de 5 epochs para estabilizar o treinamento com o SGD no início (por conta da LR alta).
+3- Data augmentation: Por mais que as imagens já tinham augmentation, adicionei um pouco mais para ajudar a regularizar o modelo. Usei mixup, CopyPaste, e mosaic, que fiz parar após 10 epochs. São regularizações bem comuns em object detection, então não há nada particular que eu ache importante comentar.
+4- Batch size: 64: Foi o ideal para esse dataset e modelo; menos iria demorar muito para treinar, e mais iria piorar a generalização. Além disso, eu não sei se batchs sizes maiores (>=256) iriam caber na VRAM da GPU.
+5- Também utilizei early_stopping com patience 5, para evitar overfitting.
+
+Além disso, utilizei um sistema simples de checkpointing, para conseguir treinar mais epochs (40) mesmo com o limite de 20 minutos por job.
